@@ -1,13 +1,16 @@
 ﻿using CsharpClicker.UseCases.AddPoints;
+using CsharpClicker.UseCases.Common;
 using CsharpClicker.UseCases.GetBoosts;
 using CsharpClicker.UseCases.GetCurrentUser;
 using CsharpClicker.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsharpClicker.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly IMediator mediator;
@@ -31,11 +34,7 @@ public class HomeController : Controller
         return View(viewModel);
     }
 
-    [HttpPost("click")]
-    public async Task<IActionResult> Click()
-    {
-        await mediator.Send(new AddPointsCommand(Times: 1));
-
-        return RedirectToAction(nameof(Index));
-    }
+    [HttpPost("score")]
+    public async Task<ScoreDto> Click(AddPointsCommand command)
+        => await mediator.Send(command);
 }

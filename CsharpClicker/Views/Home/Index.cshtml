@@ -1,40 +1,72 @@
 ﻿@model IndexViewModel
 
-<div>
-    <div>
-        <h3>Добро пожаловать, Негорящий, в бесконечную тьму, порожденную @Model.User.UserName</h3>
-        <h4>В твоём владении @Model.User.CurrentScore душ</h4>
-        <h4>За всё время нахождения в сдешних местах ты овладел @Model.User.RecordScore душами</h4>
-        <h4>За одну убитую нежить ты получаешь @Model.User.ProfitPerClick</h4>
+@section styles{
+    <link href="@Url.Content("~/css/index.css")" rel="stylesheet"/>
+}
+@{
+    ViewBag.Title = $"Добро пожаловать, Негорящий, в бесконечную тьму, порожденную {@Model.User.UserName}";
+}
+<div class="row row-cols-3">
+    <div class="col">
+        <div class="bg-secondary bg-opacity-25 p-1 text-light-gray" style="color: #CAC3C3; border-radius: 10px;">
+            <ul class="user-properties">
+                <li>
+                    <h4 class="text-start">В твоём владении <span id="current_score">@Model.User.CurrentScore</span> душ</h4>
+                </li>
+                <li>
+                    <h4 class="text-start">За всё время нахождения в сдешних местах ты овладел <span id="record_score">@Model.User.RecordScore</span> душами</h4>
+                </li>
+                <li>
+                    <h4 class="text-start">За одну убитую нежить ты получаешь <span id="profit_per_click">@Model.User.ProfitPerClick</span> душ</h4>
+                </li>
+                <li>
+                    <h4 class="text-start">Твои подчиненные ежесекундно добывают <span id="profit_per_second">@Model.User.ProfitPerSecond</span> душ</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6 ml-auto pt-2">
+            <form asp-action="Logout" asp-controller="Auth">
+                <input type="submit" class="btn btn-primary" value="Выйти из мира" />
+            </form>
+        </div>
     </div>
-    <form asp-action="Click" asp-controller="Home" method="post">
-        <button type="submit">
-            <img src="~/undead.png" />
+    <div class="col">
+        <button id="clickitem" class="click-item bg-transparent border-0">
+            <img class="w-75" src="~/undead.png" />
         </button>
-    </form>
-    <div>
-        <h3>Предметы роскоши</h3>
-        @foreach (var boost in Model.Boosts)
-        {
-            var userBoost = Model.User.UserBoosts.FirstOrDefault(ub => ub.BoostId == boost.Id);
-
-            var price = userBoost?.CurrentPrice ?? boost.Price;
-
-            <button>
-                <h4>@boost.Title</h4>
-                <img src="data:image/png;base64, @Convert.ToBase64String(boost.Image)" />
-                <h5>Цена: @price</h5>
-                <h5>
-                    Доход: @boost.Profit
-                    @if (boost.IsAuto)
-                    {
-                        <span> в секунду</span>
-                    }
-                </h5>
-            </button>
-        }
     </div>
-    <form asp-action="Logout" asp-controller="Auth">
-        <input type="submit" class="btn btn-primary" value="Выйти из мира" />
-    </form>
+    <div class="col">
+        <h3 style="color: #a69aa4";>Предметы роскоши</h3>
+        <div class="col bg-opacity-25 text-light-gray" style="border-radius: 10px;">
+            @foreach (var boost in Model.Boosts)
+            {
+                var userBoost = Model.User.UserBoosts.FirstOrDefault(ub => ub.BoostId == boost.Id);
+
+                var price = userBoost?.CurrentPrice ?? boost.Price;
+                var quantity = userBoost?.Quantity ?? 0;
+
+                <button class="boost-button border-0 mb-3" style="border-radius: 10px;">
+                    <span class="boost-id" hidden>@boost.Id</span>
+                    <h4>@boost.Title</h4>
+                    <img src="data:image/png;base64, @Convert.ToBase64String(boost.Image)" height="100" />
+                    <h5 class="boost-price-string">Цена: <span class="boost-price">@price</span></h5>
+                    <h5>
+                        Доход: @boost.Profit
+                        @if (boost.IsAuto)
+                        {
+                            <span> в секунду</span>
+                        }
+                    </h5>
+                    <h5>
+                        Количество приобретенных бустов: <span class="boost-quantity">@quantity</span>
+                    </h5>
+                </button>
+            }
+        </div>
+    </div>
 </div>
+
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="~/js/index.js"></script>
+}

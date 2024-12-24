@@ -2,8 +2,10 @@ using CsharpClicker.Infrastructure.Abstractions;
 using CsharpClicker.Infrastructure.DataAccess;
 using CsharpClicker.Infrastructure.Implements;
 using CsharpClicker.Initizlizers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace CsharpClicker;
 
@@ -46,7 +48,7 @@ public class Program
         services.AddAutoMapper(typeof(Program).Assembly);
         services.AddMediatR(o => o.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-        services.AddAuthentication();
+        services.AddAuthentication().AddCookie();
         services.AddAuthorization();
         services.AddControllersWithViews();
 
@@ -54,6 +56,7 @@ public class Program
         services.AddScoped<IAppDbContext, AppDbContext>();
 
         IdentityInitializer.AddIdentity(services);
+        services.ConfigureApplicationCookie(options => options.LoginPath = "/auth/login");
         DbContextInitializers.AddAppDbContext(services);
     }
 }

@@ -8,8 +8,8 @@ namespace CsharpClicker.UseCases.GetBoosts;
 
 public class GetBoostsQueryHandler : IRequestHandler<GetBoostsQuery, IReadOnlyCollection<BoostDto>>
 {
-    private IAppDbContext appDbContext;
-    private IMapper mapper;
+    private readonly IAppDbContext appDbContext;
+    private readonly IMapper mapper;
 
     public GetBoostsQueryHandler(IAppDbContext appDbContext, IMapper mapper)
     {

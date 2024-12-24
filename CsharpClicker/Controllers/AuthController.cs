@@ -1,4 +1,5 @@
 ﻿    using CsharpClicker.UseCases.Login;
+using CsharpClicker.UseCases.Logout;
 using CsharpClicker.UseCases.Register;
 using CsharpClicker.ViewModels;
 using MediatR;
@@ -76,10 +77,10 @@ public class AuthController : Controller
     }
 
     [HttpPost("logout")]
-    public async Task<IActionResult> Logout(LoginCommand command)
+    public async Task<IActionResult> Logout(LogoutCommand command)
     {
         await mediator.Send(command);
 
-        return RedirectToAction("Login");
+        return RedirectToAction("login");
     }
 }

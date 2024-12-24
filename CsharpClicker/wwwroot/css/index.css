@@ -1,0 +1,114 @@
+﻿﻿#clickitem, .boost-button:active {
+    opacity: 0.6;
+}
+
+.boost-button:enabled {
+    background-color: #CAC3C3;
+    opacity: 0.7;
+}
+
+.boost-button:enabled:active {
+    opacity: 0.6;
+}
+
+.user-properties {
+    list-style: none;
+    padding: 0;
+}
+
+.user-properties li {
+    display: flex;
+    align-items: center;
+    word-wrap: normal;
+    background: url(../bonfire.png) no-repeat left center;
+    padding-left: 52px;
+    margin-bottom: 30px;
+    height: 60px;
+}
+
+.user-properties li:last-child {
+    margin: 0;
+}
+
+.btn {
+    background-color: #F0E68C;
+    opacity: 0.7;
+    color: black;
+}
+
+.viewbag-title {
+    color: #f5f3f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+body {
+    font-family: "Optimus Princeps";
+    src: url('OptimusPrinceps.ttf') format('ttf');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        background-image: url(../Site-background-dark-mobile.webp)
+    }
+}
+
+@media only screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio:2),only screen and (max-width:767px) and (min-resolution:192dpi) {
+    body {
+        background-image: url(../Site-background-dark-mobile-2x.webp)
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width:1023px) {
+    body {
+        background-image: url(../Site-background-dark-tablets.webp)
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width:1023px) and (-webkit-min-device-pixel-ratio:2),only screen and (min-width:768px) and (max-width:1023px) and (min-resolution:192dpi) {
+    body {
+        background-image: url(../Site-background-dark-tablets-2x.webp)
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width:1279px) {
+    body {
+        background-image: url(../Site-background-dark-desktop.webp)
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width:1279px) and (-webkit-min-device-pixel-ratio:2),only screen and (min-width:1024px) and (max-width:1279px) and (min-resolution:192dpi) {
+    body {
+        background-image: url(../Site-background-dark-full.webp)
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    body {
+        background-image: url(../Site-background-dark-large-desktop.webp)
+    }
+}
+
+@media only screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio:2),only screen and (min-width:1280px) and (min-resolution:192dpi) {
+    body {
+        background-image: url(../Site-background-dark-full.webp)
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    body {
+        background-image: url(../Site-background-dark-full.webp)
+    }
+}
+
+.row {
+    text-align: center;
+}

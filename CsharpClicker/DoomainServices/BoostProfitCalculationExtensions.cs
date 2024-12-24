@@ -13,7 +13,7 @@ public static class BoostProfitCalculationExtensions
                 .Sum(ub => ub.Quantity * ub.Boost.Profit);
         }
 
-        return 1 + userBoosts
+        return 6 + userBoosts
             .Where(ub => !ub.Boost.IsAuto)
             .Sum(ub => ub.Quantity * ub.Boost.Profit);
     }
